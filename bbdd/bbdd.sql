@@ -1,0 +1,15 @@
+CREATE TABLE Publicacion (
+	id_public	INT CONSTRAINT pk_public NOT NULL PRIMARY KEY,
+	titulo		VARCHAR(100) CONSTRAINT pub_titulo NOT NULL,
+	contenido 	VARCHAR(10000) CONSTRAINT pub_cont NOT NULL,
+	tipo		INT CONSTRAINT pub_tipo	NOT_NULL,
+);
+
+CREATE TABLE Tema (
+	nombre 		VARCHAR(100) CONSTRAINT tm_nombre NOT NULL PRIMARY KEY,
+);
+
+CREATE TABLE Usuario (
+	correo		VARCHAR(50) CONSTRAINT correo_usu NOT NULL PRIMARY KEY,
+	nombre 		VARCHAR()
+);
