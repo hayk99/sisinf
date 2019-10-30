@@ -1,14 +1,15 @@
+/*
+* Clase que abstrae la conexion con la base de datos
+* Hayk Kocharyan - Javier Salamero - Jesus Villacampa
+*/
+
 package es.unizar.sising.data.db;
 import java.sql*;
 
 import javax.naming.Context;
-import.naming.InitialContxt;
+import javax.naming.InitialContxt;
 import javax.sql.DataSource;
 
-/*
-* Ckase que abstrae la conexion con la base de datos
-* Hayk Kocharyan - Javier Salamero - Jesus Villacampa
-*/
 public class ConnectioManager {
 	// Devuelve la conexion, para no tener que abrirla y cerrar siempre
 	public final static Connection getConnection() throws SQLException {
