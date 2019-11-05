@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.unizar.sisinf.data.db.ConnectionManager;
+import es.unizar.sisinf.data.db.ConnectionManager.*;
 import es.unizar.sisinf.data.vo.UsuarioVO;
 
 /**
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 			
 			//Leemos resultados
 			if (rs.first()) {
-				result = new UsuarioVO(rs.getInt("id"), rs.getString("name"));
+				result = new UsuarioVO(rs.getString("id"), rs.getString("passwd"), rs.getString("name"));
 			}
 			else {
 				result = null;
