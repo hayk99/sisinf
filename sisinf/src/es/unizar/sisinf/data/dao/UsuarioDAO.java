@@ -52,4 +52,28 @@ public class UsuarioDAO {
 		}
 		return result;
 	}
+	/**
+	 * Devuelvetodoslosregistrosdelatabla DEMO 
+	 * @returnListadetodoslosregistrosdelatabla DEMO 
+	 */
+	public List<UsuarioVO> findAll(){ 
+		List<UsuarioVO> result = new ArrayList<UsuarioVO>();
+		try {// Abrimoslaconexión e inicializamoslosparámetros 
+			Connection conn = ConnectionManager.getConnection(); 
+			PreparedStatement ps = conn.prepareStatement(findAll);
+			// Ejecutamos la consulta 
+			ResultSet rs = ps.executeQuery();
+			// Leemos resultados 
+			while(rs.next()) {
+				UsuarioVO tmp = new UsuarioVO(rs.getString("id"), rs.getString("passwd"), rs.getString("name"));
+				result.add(tmp); 
+			}  
+			ConnectionManager.releaseConnection(conn); 
+		} catch(SQLException se) {
+			se.printStackTrace();  
+		} catch(Exception e) {
+			e.printStackTrace(System.err); 
+		}
+		return result;
+	}
 }
