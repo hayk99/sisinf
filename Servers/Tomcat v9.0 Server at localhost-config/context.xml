@@ -26,4 +26,8 @@
     <!--
     <Manager pathname="" />
     -->
+         <ResourceLink name="jdbc/sisinfDB"
+                  global="jdbc/SIDB"
+                  auth="Container"
+                  type="javax.sql.DataSource" />s
 </Context>

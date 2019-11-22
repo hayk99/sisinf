@@ -21,7 +21,7 @@ public class Usuario extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
-		// Llamadaalmetodo post
+		// Llamada al metodo post
 		doPost(request, response);
 	}
 	/** 
@@ -32,7 +32,7 @@ public class Usuario extends HttpServlet {
 		try {List<UsuarioVO> lista = new UsuarioDAO().findAll();
 		System.out.println(lista.get(1).getNickname());
 		request.setAttribute("listaDemo", lista);
-		request.getRequestDispatcher("listaDemo.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/primer.jsp").forward(request, response);
 		}catch(Throwable theException) {
 			
 		}

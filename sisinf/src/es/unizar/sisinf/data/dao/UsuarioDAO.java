@@ -16,8 +16,8 @@ import es.unizar.sisinf.data.vo.UsuarioVO;
  *
  */
 public class UsuarioDAO {
-	private static String findByIdQuery = "SELECT * FROM usuario WHERE id = ?";
-	private static String findAll = "SELECT * FROM usuario";
+	private static String findByIdQuery = "SELECT * FROM Usuario WHERE nombre = ?";
+	private static String findAll = "SELECT * FROM Usuario";
 	
 	/**
 	 * Busca un registrod en la tabla DEMO por ID
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 			
 			//Leemos resultados
 			if (rs.first()) {
-				result = new UsuarioVO(rs.getString("id"), rs.getString("passwd"), rs.getString("name"));
+				result = new UsuarioVO(rs.getString("nombre"), rs.getString("contrasena"), rs.getString("correo"));
 			}
 			else {
 				result = null;
@@ -65,7 +65,7 @@ public class UsuarioDAO {
 			ResultSet rs = ps.executeQuery();
 			// Leemos resultados 
 			while(rs.next()) {
-				UsuarioVO tmp = new UsuarioVO(rs.getString("id"), rs.getString("passwd"), rs.getString("name"));
+				UsuarioVO tmp = new UsuarioVO(rs.getString("nombre"), rs.getString("contrasena"), rs.getString("correo"));
 				result.add(tmp); 
 			}  
 			ConnectionManager.releaseConnection(conn); 
