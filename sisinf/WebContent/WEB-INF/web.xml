@@ -11,4 +11,15 @@
  	<servlet-name>loginServ</servlet-name>
  	<url-pattern>/loginServ</url-pattern>
  </servlet-mapping>
+
+  <servlet>
+ 	<servlet-name>registrar</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.Registrar</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>registrar</servlet-name>
+ 	<url-pattern>/registrar</url-pattern>
+ </servlet-mapping>
+
+
 </web-app>

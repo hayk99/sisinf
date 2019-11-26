@@ -7,16 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lista Demo</title>
+<title>REGISTRO</title>
 </head>
 <body>
-	<table>
-		<c:forEach var="demo" items="${listaDemo}">
-			<tr><td>
-				<c:out value="${demo.nickname}"/>
-			</td><td>
-				<c:out value="${demo.email}"/>
-			</td></tr>
-		</c:forEach>
-	</table>
+	<% String msg = (String)request.getAttribute("result"); %>
+	<%=msg %>
 </body></html>

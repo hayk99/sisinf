@@ -18,12 +18,35 @@ import es.unizar.sisinf.data.vo.UsuarioVO;
 public class UsuarioDAO {
 	private static String findByIdQuery = "SELECT * FROM Usuario WHERE nombre = ?";
 	private static String findAll = "SELECT * FROM Usuario";
+	private static String insertUser = "ISERT INTO Usuario (nombre, contrasena, correo) VALUES (?,?,?)";
 	
 	/**
 	 * Busca un registrod en la tabla DEMO por ID
 	 * @param id Identificador del regsitro buscado
 	 * @return Objeto DemoVO con el identificador buscado, o null si no se encuentra
 	 */
+	public boolean insertUser (UsuarioVO user) {
+		boolean exito = false;
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(insertUser);
+			ps.setString(1,user.getNickname());
+			ps.setString(2,user.getPasswd());
+			ps.setString(3,user.getEmail());
+			
+			if ( ps.executeUpdate() > 0) {
+				System.out.println("REGISTRADO CORRECTAMENTE");
+				exito = true;
+			}
+			
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		return exito;
+	}
+	
 	public UsuarioVO findById (int id) {
 		
 		UsuarioVO result = null;

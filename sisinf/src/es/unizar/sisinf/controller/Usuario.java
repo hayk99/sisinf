@@ -31,6 +31,7 @@ public class Usuario extends HttpServlet {
 	ServletException, IOException {
 		try {List<UsuarioVO> lista = new UsuarioDAO().findAll();
 		System.out.println(lista.get(1).getNickname());
+		System.out.println(lista.get(1).getPasswd());
 		request.setAttribute("listaDemo", lista);
 		request.getRequestDispatcher("jsp/primer.jsp").forward(request, response);
 		}catch(Throwable theException) {
