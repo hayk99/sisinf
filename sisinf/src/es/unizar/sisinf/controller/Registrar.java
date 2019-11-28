@@ -28,7 +28,7 @@ public class Registrar extends HttpServlet {
 	ServletException, IOException {
 		String msg = "";
 		try {	
-			boolean existeUser;
+			boolean existeUser, existeMail;
 			UsuarioVO newUser = null;
 			String correo = request.getParameter("correo");
 			String correoCheck = request.getParameter("correoCheck");
@@ -37,26 +37,24 @@ public class Registrar extends HttpServlet {
 			String passCheck  = request.getParameter("passCheck");
 			if ((correo.equals(correoCheck)) && (pass.equals(passCheck))) {
 				existeUser = new UsuarioDAO().existeUsuario(name);
-				if (!existeUser) {
+				existeMail = new UsuarioDAO().existeCorreo(correo);
+				boolean noInsertar = existeUser | existeMail;
+				if (!noInsertar) {
 					newUser = new UsuarioVO(name, pass, correo);
 					new UsuarioDAO().insertUser(newUser);
 					msg = "Creado usuario de manera correcta";
 					request.setAttribute("result", msg);
-					System.out.println("llamo jsp crear");
 					request.getRequestDispatcher("jsp/registroOK.jsp").forward(request, response);
 				}
 				else {
 					msg = "El correo o el usuario ya está registrado \n Pruebe con uno diferentes \n :(((";
-					request.setAttribute("errorExiste", "El correo o el usuario ya está registrado \n Pruebe con uno diferentes \n :(((");
-					System.out.println("llamo jsp  existe");
-					request.getRequestDispatcher("jsp/errorInsert_Coincidencia2.jsp").forward(request, response);
-					System.out.println("llamado");
+					//request.setAttribute("errorExiste",msg);
+					request.getRequestDispatcher("jsp/errorRegistro.jsp").forward(request, response);
 				}
 			}
 			else {
 				msg = "El correo o la contraseña no coinciden :(((";
-				request.setAttribute("errorResultado", "El correo o la contraseña no coinciden :(((");
-				System.out.println("llamo jsp coincide");
+				request.setAttribute("error", "El correo o la contraseña no coinciden :(((");
 				request.getRequestDispatcher("jsp/errorInsert_Coincidencia.jsp").forward(request, response);
 			}
 		}catch(Throwable theException) {

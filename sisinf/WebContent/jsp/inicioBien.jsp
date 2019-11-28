@@ -7,11 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ERROR COINCIDENCIA</title>
+<title>REGISTRO</title>
 </head>
-	<% String msg = (String)request.getAttribute("error"); %>
+	<% String msg = (String)request.getAttribute("msg"); %>
 	<script>
 		window.alert("<%=msg%>");
-		window.location.href ="/sisinf/registro.html";
-	</script>	
+		window.location.href ="/sisinf";
+		</script>
 </html>

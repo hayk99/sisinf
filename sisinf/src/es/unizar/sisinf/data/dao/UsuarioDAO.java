@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger; 
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
 
 import es.unizar.sisinf.data.db.ConnectionManager.*;
 import es.unizar.sisinf.data.vo.UsuarioVO;
@@ -20,24 +23,48 @@ public class UsuarioDAO {
 	private static String findAll = "SELECT * FROM Usuario";
 	private static String insertUser = "INSERT INTO Usuario (nombre, contrasena, correo) VALUES (?,MD5(?),?)";
 	private static String existeUser = "SELECT count(*) as cantidad FROM Usuario WHERE nombre= ?";
+	private static String existeCorreo = "SELECT count(*) as cantidad FROM Usuario WHERE correo= ?";
+	private static String checkPass = "SELECT count(*) as cantidad FROM Usuario WHERE correo=? AND contrasena=md5(?)";
+	private static String insertPost = "INSERT INTO Publicacion (idPublicacion, titulo, contenido, correousuario) VALUES (?,?,?,?)";
 	
-	/**
-	 * Busca un registrod en la tabla DEMO por ID
-	 * @param id Identificador del regsitro buscado
-	 * @return Objeto DemoVO con el identificador buscado, o null si no se encuentra
-	 */
-	public boolean existeUsuario (String name) {
+	private static int contador = 0;
+	
+	public boolean insertPost (String titulo, String body, String mail) {
 		boolean exito = false;
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement ps = conn.prepareStatement(existeUser);
-			ps.setString(1,name);
-			System.out.println("vamos a ver si existe");
+			PreparedStatement ps = conn.prepareStatement(insertPost);
+			ps.setInt(1,contador);
+			ps.setString(2,titulo);
+			ps.setString(3,body);
+			ps.setString(4,mail);
+			
+			if ( ps.executeUpdate() > 0) {
+				System.out.println("METIDO POST CORRECTAMENTE");
+				exito = true;
+			}
+			
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		return exito;
+	}
+	
+	
+	public boolean checkPassword (String correo, String passwd) {
+		boolean exito = false;
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(checkPass);
+			ps.setString(1,correo);
+			ps.setString(2,passwd);
+			
 			ResultSet rs = ps.executeQuery();
 			if (rs.first()) {
-				System.out.println("entro if");
+				System.out.println(rs.getString("cantidad"));
 				int value = rs.getInt("cantidad");
-				System.out.println("despues get");
 				if (value > 0) {
 					exito = true;
 				}
@@ -50,6 +77,54 @@ public class UsuarioDAO {
 		return exito;
 		
 	}
+	
+	
+	public boolean existeCorreo (String correo) {
+		boolean exito = false;
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(existeCorreo);
+			ps.setString(1,correo);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.first()) {
+				int value = rs.getInt("cantidad");
+				if (value > 0) {
+					exito = true;
+				}
+			}
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		return exito;
+		
+	}
+	
+	public boolean existeUsuario (String name) {
+		boolean exito = false;
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(existeUser);
+			ps.setString(1,name);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.first()) {
+				int value = rs.getInt("cantidad");
+				if (value > 0) {
+					exito = true;
+				}
+			}
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		return exito;
+		
+	}
+	
 	public void insertUser (UsuarioVO user) {
 		try {
 			Connection conn = ConnectionManager.getConnection();

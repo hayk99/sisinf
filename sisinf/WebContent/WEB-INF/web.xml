@@ -24,15 +24,23 @@
  	<url-pattern>/registrar</url-pattern>
  </servlet-mapping>
 
-   <servlet>
+  <servlet>
  	<servlet-name>inises</servlet-name>
     <servlet-class>es.unizar.sisinf.controller.IniSes</servlet-class>
  </servlet>
  <servlet-mapping>
  	<servlet-name>inises</servlet-name>
  	<url-pattern>/inises</url-pattern>
+</servlet-mapping>
+ 	
+  <servlet>
+ 	<servlet-name>ponerPost</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.PonerPost</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>ponerPost</servlet-name>
+ 	<url-pattern>/ponerPost</url-pattern>
  </servlet-mapping>
-
 
 
 </web-app>
