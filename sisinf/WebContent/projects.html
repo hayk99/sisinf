@@ -166,17 +166,17 @@
 		
 					<div class="row h_blog_item">
 						<div class="col-lg-6">
-							<form id="login-form" method="post" action="ponerPost" role="form" style="display: block;">
+							<form id="login-form" method="post" action="ponerPost" role="form" novalidate="novalidate" style="display: block;">
 								<div class="form-group">
 									<input type="text" name="title" id="title" tabindex="1" class="form-control" placeholder="Título" value="">
 								</div>
 								<div class="form-group">
-									<input type="text" name="contenido" id="contenido" tabindex="1" class="form-control" placeholder="Escribe tu post" value="">
+									<textarea class="form-control" name="text" id="text" rows="1" placeholder="Escribe tu mensaje"></textarea>
 								</div>
-								<div class="form-group">
-										<div class="col-sm-6 col-sm-offset-3">
-											<input style="text-align: center" type="submit" name="publicar-submit" id="publicar-submit" tabindex="4" class="form-control btn btn-login" value="Publicar">
-										</div>
+								
+									<div class="col-md-12 text-right">
+										<button type="submit" action="ponerPost" value="submit" class="btn submit_btn">Publicar</button>
+									</div>
 								</div>
 						</div>
 
