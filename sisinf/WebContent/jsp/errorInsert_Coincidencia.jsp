@@ -7,11 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>REGISTRO</title>
+<title>REGISTRO ERRONEO</title>
 </head>
-	<% String msgg = (String)request.getAttribute("result"); %>
+	<% String msg = (String)request.getAttribute("errorResultado"); %>
 	<script>
-		window.alert("<%=msgg%>");
-		window.location.href ="/sisinf";
-		</script>
+		window.alert("Las contraseñas o los correos NO coinciden");
+		window.location.href ="/sisinf/registro.html";
+	</script>	
 </html>

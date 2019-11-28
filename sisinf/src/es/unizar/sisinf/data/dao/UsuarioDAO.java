@@ -18,15 +18,39 @@ import es.unizar.sisinf.data.vo.UsuarioVO;
 public class UsuarioDAO {
 	private static String findByIdQuery = "SELECT * FROM Usuario WHERE nombre = ?";
 	private static String findAll = "SELECT * FROM Usuario";
-	private static String insertUser = "ISERT INTO Usuario (nombre, contrasena, correo) VALUES (?,?,?)";
+	private static String insertUser = "INSERT INTO Usuario (nombre, contrasena, correo) VALUES (?,MD5(?),?)";
+	private static String existeUser = "SELECT count(*) as cantidad FROM Usuario WHERE nombre= ?";
 	
 	/**
 	 * Busca un registrod en la tabla DEMO por ID
 	 * @param id Identificador del regsitro buscado
 	 * @return Objeto DemoVO con el identificador buscado, o null si no se encuentra
 	 */
-	public boolean insertUser (UsuarioVO user) {
+	public boolean existeUsuario (String name) {
 		boolean exito = false;
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(existeUser);
+			ps.setString(1,name);
+			System.out.println("vamos a ver si existe");
+			ResultSet rs = ps.executeQuery();
+			if (rs.first()) {
+				System.out.println("entro if");
+				int value = rs.getInt("cantidad");
+				System.out.println("despues get");
+				if (value > 0) {
+					exito = true;
+				}
+			}
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		return exito;
+		
+	}
+	public void insertUser (UsuarioVO user) {
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement ps = conn.prepareStatement(insertUser);
@@ -36,7 +60,6 @@ public class UsuarioDAO {
 			
 			if ( ps.executeUpdate() > 0) {
 				System.out.println("REGISTRADO CORRECTAMENTE");
-				exito = true;
 			}
 			
 		}catch (SQLException se) {
@@ -44,7 +67,6 @@ public class UsuarioDAO {
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
-		return exito;
 	}
 	
 	public UsuarioVO findById (int id) {

@@ -18,6 +18,17 @@
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <link rel="stylesheet" href="leaflet/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        <script src="leaflet/dist/leaflet-routing-machine.js"></script>
+        <script src="geocoder/dist/Control.Geocoder.js"></script>
+        <script src="geocoder/src/geocoders/photon.js"></script>
+        <script src="geocoder/Control.Geocoder.css"></script>
     </head>
     <body>
         
@@ -91,15 +102,41 @@
         <!--================End Home Banner Area =================-->
         
         <!--================mapa de busqueda =================-->
-        <section class="home_blog_area pad_top">
+        <!-- <section class="home_blog_area pad_top">
                 <div align="center">
                         <iframe width="825" height="550" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-1.0632705688476565%2C41.58720193303142%2C-0.7765960693359376%2C41.70226816907105&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/>
                         <small><a href="https://www.openstreetmap.org/#map=13/41.6448/-0.9199">Ver mapa más grande</a></small>
                         </div>
                         
-        </section>
+        </section> -->
+        <div id="mapid"></div>
+        <script>
+        var mymap = L.map('mapid').setView([41.6483, -0.8775], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2h1c2VqZWEiLCJhIjoiY2szZzQ3dnJ4MGFnODNmb3plZWZ6MXVpMSJ9.EIEXpPq1oUHmdOpesKBeUw', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            }).addTo(mymap);
 
+            L.Routing.control({
+            language: 'es',
+            waypoints: [
+                //L.latLng(41.6483, -0.8775),
+               // L.latLng(41.6483, -0.8775)
+            ],
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.photon(),
+            }).addTo(mymap);
 
+            // var circle = L.circle([41.6483, -0.8775], {
+            //     color: 'red',
+            //     fillColor: '#f03',
+            //     fillOpacity: 0.5,
+            //     radius: 50
+            //     }).addTo(mymap);
+            
+        </script>
+    
         <section class ="botones_mapa">
             <div class="titulomapa1"> CALCULAR RUTA </br></div>
             <div class="titulomapa1"> PUNTOS MAS CONTAMINANTES </br></div>
@@ -109,140 +146,7 @@
         </section>
         <!--================End Home Blog Area =================-->
         
-        <!--================Service Area =================-->
-        <!-- <section class="service_area p_120">
-            <div class="container box_1620">
-                <div class="main_title">
-                    <h2>Services Offered by Us</h2>
-                    <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
-                </div>
-                <div class="row m0 service_inner">
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_img">
-                            <img class="img-fluid" src="img/service/service-1.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_text">
-                            <h4>Spreading <br />Peace to world</h4>
-                            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_img">
-                            <img class="img-fluid" src="img/service/service-2.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_text">
-                            <h4>Spreading <br />Peace to world</h4>
-                            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_text">
-                            <h4>Spreading <br />Peace to world</h4>
-                            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_img">
-                            <img class="img-fluid" src="img/service/service-3.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_text">
-                            <h4>Spreading <br />Peace to world</h4>
-                            <p>If you are looking at blank cassettes on the web, you may be very confused at the difference.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 p0">
-                        <div class="service_img">
-                            <img class="img-fluid" src="img/service/service-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!--================End Service Area =================-->
-        
-        <!--================Feedback Area =================-->
-        <!-- <section class="feedback_area pad_bt">
-            <div class="container">
-                <div class="feedback_inner p_100">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="feedback_text">
-                                <h3>Client’s Feedback</h3>
-                                <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderitin.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="testi_slider_inner">
-                                <div class="testi_slider owl-carousel">
-                                    <div class="item">
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/testimonials/testi-1.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>“Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector, hardware”.</p>
-                                                <h4>Mark Alviro Wiens</h4>
-                                                <h5>CEO at Google</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/testimonials/testi-1.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>“Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector, hardware”.</p>
-                                                <h4>Mark Alviro Wiens</h4>
-                                                <h5>CEO at Google</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="img/testimonials/testi-1.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <p>“Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker, projector, hardware”.</p>
-                                                <h4>Mark Alviro Wiens</h4>
-                                                <h5>CEO at Google</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-        <!--================End Feedback Area =================-->
-        
-        <!--================Instagram Area =================-->
-        <!-- <section class="instagram_area">
-            <div class="container box_1620">
-                <div class="insta_btn">
-                    <a class="btn theme_btn" href="#">Follow us on instagram</a>
-                </div>
-                <div class="instagram_image row m0">
-                    <a href="#"><img src="img/instagram/ins-1.jpg" alt=""></a>
-                    <a href="#"><img src="img/instagram/ins-2.jpg" alt=""></a>
-                    <a href="#"><img src="img/instagram/ins-3.jpg" alt=""></a>
-                    <a href="#"><img src="img/instagram/ins-4.jpg" alt=""></a>
-                    <a href="#"><img src="img/instagram/ins-5.jpg" alt=""></a>
-                    <a href="#"><img src="img/instagram/ins-6.jpg" alt=""></a>
-                </div>
-            </div>
-        </section> -->
-        <!--================End Instagram Area =================-->
-        
+    
         <!--================Footer Area =================-->
         <footer class="footer_area">
             <div class="container">

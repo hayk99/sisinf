@@ -3,6 +3,9 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
  <description>App EcoZity</description>
  <display-name>ecoZity</display-name>
+ <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+</welcome-file-list>
  <servlet>
  	<servlet-name>loginServ</servlet-name>
     <servlet-class>es.unizar.sisinf.controller.Usuario</servlet-class>
