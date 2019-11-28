@@ -7,11 +7,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>REGISTRO ERRONEO</title>
+<title>ERRROR AL REGISTRAR</title>
 </head>
-	<% String msg = (String)request.getAttribute("error"); %>
+	<% String msg = "El correo o el usuario ya está registrado \n Pruebe con uno diferentes \n :((("; %>
 	<script>
-		window.alert("<%=msg%>");
+		window.alert("El correo o el usuario ya está registrado \n Pruebe con uno diferentes \n :(((");
 		window.location.href ="/sisinf/registro.html";
-	</script>	
+		</script>
 </html>
