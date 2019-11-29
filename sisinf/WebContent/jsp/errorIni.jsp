@@ -8,6 +8,11 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>REGISTRO ERRONEO</title>
+
+    <style type="text/css">
+	     background:#ffffff;
+    </style>
+    
 </head>
 	<% String msg = (String)request.getAttribute("error"); %>
 	<script>
