@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>ccacacaca</h1>
+	<div>
+	 <!-- METO AQUI SCRIPT PARA GENERAR PAGINA DINÁMICA -->
+        <%@ page import="es.unizar.sisinf.dao.UsuarioDAO.java" %>
+        <%@ page import= "es.unizar.sisinf.data.db.ConnecionManager.ConnecionManager.java"%>
+        <%
+	        String findNews = "SELECT * FROM Publicacion";
+	        	try {
+				Connection conn = ConnectionManager.getConnection();
+				PreparedStatement ps = conn.prepareStatement(findNews);
+				console.log("query done");
+				ResultSet rs = ps.executeQuery();
+				if ( rs.first()) {
+					console.log("query get correctly");
+					document.innerHTML += "<h1> meto esto ns que pasra </h1>";
+					
+				}
+			}catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+        
+        %>
+	</div>
+</body>
+</html>

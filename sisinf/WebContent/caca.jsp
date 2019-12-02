@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="en">
-<%
+    
+
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="icon" href="img/favicon.png" type="image/png">
         <title>Flash Photography</title>
         <!-- Bootstrap CSS -->
@@ -54,7 +56,7 @@
 										<li class="nav-item submenu dropdown">
 											<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Noticias</a>
 											<ul class="dropdown-menu">
-												<li class="nav-item "><a class="nav-link" href="blog.html">Noticias Ãºltima hora</a></li>
+												<li class="nav-item "><a class="nav-link" href="blog.html">Noticias última hora</a></li>
 												<li class="nav-item"><a class="nav-link" href="single-blog.html">Noticias detalladas</a></li>
 											</ul>
 										</li> 
@@ -62,7 +64,7 @@
 										<li class="nav-item submenu dropdown">
 											<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Cuenta</a>
 											<ul class="dropdown-menu">
-												<li class="nav-item "><a class="nav-link" href="inisesion.html">Inicio de sesiÃ³n</a></li>
+												<li class="nav-item "><a class="nav-link" href="inisesion.html">Inicio de sesión</a></li>
 												<li class="nav-item"><a class="nav-link" href="registro.html"> Registrarse</a></li>
 											</ul>
 										</li>
@@ -95,6 +97,63 @@
         <!--================End Home Banner Area =================-->
         
         
+
+					 	<!-- METO AQUI SCRIPT PARA GENERAR PAGINA DINÁMICA -->
+					 	<%@ page import="java.sql.*" %>
+				        <%@ page import="es.unizar.sisinf.*" %>
+				        <%@ page import="es.unizar.sisinf.data.db.ConnectionManager.*" %>
+				        <%
+					        String findNews = "SELECT * FROM Publicacion";
+					        	try {
+								Connection conn = ConnectionManager.getConnection();
+								PreparedStatement ps = conn.prepareStatement(findNews);
+								System.out.println("query done");
+								ResultSet rs = ps.executeQuery();
+								out.println("<div class=\"cositas\">");
+								out.println("<section class=\"home_blog_area p_120\">");
+									out.println("<div class=\"container\">");
+										out.println("<div class=\"home_blog_inner\">");
+											out.println("<div class=\"col-lg-6\">");
+												out.println("<div class=\"h_blog_text\">");
+													out.println("<div class=\"h_blog_text_inner left\">");
+															out.println("<h2 id=\"ultimas\">ÚLTIMAS &nbspPUBLICACIONES</br></h2>");
+													out.println("</div>");
+												out.println("</div>");
+											out.println("</div>");
+								while ( rs.next()) {
+									System.out.println("query get correctly");
+									String tit = rs.getString("titulo");
+									String body = rs.getString("contenido");
+									String user = rs.getString("correousuario");
+									out.println("<div class=\"row h_blog_item\">");
+										out.println("<div class=\"col_lg-6\">");
+											out.println("<div class=\"h_blog_img\">");
+												out.println("<img class=\"img-fluid\" src=\"img/home-blog/h-blog-3.jpg\" alt=\"\">");
+											out.println("</div>");
+										out.println("</div>");
+										out.println("<div class=\"col_lg-6\">");
+											out.println("<div class=\"h_blog_text\">");
+												out.println("<div class=\"h_blog_text_inner left\">");
+													out.println("<h4>"+tit+"</h4>");
+													out.println("<p>"+user+"</br>"+"</p>");
+													out.println("<p>"+body+"</p>");
+												out.println("</div>");
+											out.println("</div>");
+										out.println("</div>");
+									out.println("</div>");
+									out.println("</div>");
+								}
+							}catch (SQLException se) {
+								se.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace(System.err);
+							}
+				        
+				        
+		    							out.println("</div>");
+       								out.println("</div>");
+								out.println("</section>");
+						%>       
         <!--================Home Blog Area =================-->
         <section class="home_blog_area p_120">
         	<div class="container">
@@ -102,7 +161,7 @@
         			<div class="col-lg-6">
 							<div class="h_blog_text">
 								<div class="h_blog_text_inner left">
-									<h2 id="ultimas">ÃšLTIMAS &nbspPUBLICACIONES</h2></br>
+									<h2 id="ultimas">ÚLTIMAS &nbspPUBLICACIONES</h2></br>
 								</div>
 							</div>
 						</div>
@@ -117,7 +176,7 @@
 								<div class="h_blog_text_inner left">
 									<h4>Consejo para iniciarse en el reciclaje</h4>
 									<p>Pablo Ruiz &nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp    15 oct 2018 </br></p>
-									<p>Evitar el sobreenvasado, ya sea de frutas o verduras, comprar mas a granel con bolsas de papel es una buena opciÃ³n</p>
+									<p>Evitar el sobreenvasado, ya sea de frutas o verduras, comprar mas a granel con bolsas de papel es una buena opción</p>
 								</div>
 							</div>
 						</div>
@@ -133,7 +192,7 @@
 								<div class="h_blog_text_inner left">
 									<h4>Mi experiencia reciclando, tips y consejos</h4>
 									<p>Diego Ruiperez &nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp    20 nov 2018 </br></p>
-									<p>Os cuento mi dÃ­a a dÃ­a, que hago para reciclar mÃ¡s, como me ayuda y que ventajas tiene</p>
+									<p>Os cuento mi día a día, que hago para reciclar más, como me ayuda y que ventajas tiene</p>
 								</div>
 							</div>
 						</div>
@@ -150,7 +209,7 @@
 								<div class="h_blog_text_inner left">
 									<h4>Rutas verdes por madrid</h4>
 									<p>Diana Rupestre &nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp    2 ene 2019 </br></p>
-									<p>Os dejo algunas de las rutas por dÃ³nde suelo andar, libres de malos humos y gente pesada</p>
+									<p>Os dejo algunas de las rutas por dónde suelo andar, libres de malos humos y gente pesada</p>
 								</div>
 							</div>
 						</div>
@@ -170,7 +229,7 @@
 						<div class="col-lg-6">
 							<form id="login-form" method="post" action="ponerPost" role="form" novalidate="novalidate" style="display: block;">
 								<div class="form-group">
-									<input type="text" name="title" id="title" tabindex="1" class="form-control" placeholder="TÃ­tulo" value="">
+									<input type="text" name="title" id="title" tabindex="1" class="form-control" placeholder="Título" value="">
 								</div>
 								<div class="form-group">
 									<textarea class="form-control" name="text" id="text" rows="1" placeholder="Escribe tu mensaje"></textarea>
@@ -223,8 +282,8 @@
 							<div class="f_title">
 								<h3>Sobre nosotros</h3>
 							</div>
-							<p>Somos tres jovenes de Zaragoza con ciertas inquietudes y preocupaciÃ³n sobre el cambio climÃ¡tico y la contaminaciÃ³n, tratando que al entrar a esta web todo el mundo salga con un poco de conocimiento del que ha entrado.</p>
-							<p>Â¡Muchas gracias Colorlib por la plantilla!</p>
+							<p>Somos tres jovenes de Zaragoza con ciertas inquietudes y preocupación sobre el cambio climático y la contaminación, tratando que al entrar a esta web todo el mundo salga con un poco de conocimiento del que ha entrado.</p>
+							<p>¡Muchas gracias Colorlib por la plantilla!</p>
 							<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -234,9 +293,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<div class="col-lg-5 col-sm-6">
 						<aside class="f_widget news_widget">
 							<div class="f_title">
-								<h3>Â¡SubscrÃ­bete!</h3>
+								<h3>¡Subscríbete!</h3>
 							</div>
-							<p>No te pierdas las Ãºltimas noticias</p>
+							<p>No te pierdas las últimas noticias</p>
 							<div id="mc_embed_signup">
 								<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
 									<div class="input-group d-flex flex-row">
@@ -251,7 +310,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<div class="col-lg-2">
 						<aside class="f_widget social_widget">
 							<div class="f_title">
-								<h3>Â¡SÃ­guenos!</h3>
+								<h3>¡Síguenos!</h3>
 							</div>
 							<ul class="list">
 								<li><a href="#"><i class="fa fa-instagram"></i></a></li>
