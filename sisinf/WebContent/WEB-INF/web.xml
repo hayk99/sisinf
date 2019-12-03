@@ -15,7 +15,16 @@
  	<url-pattern>/loginServ</url-pattern>
  </servlet-mapping>
 
-  <servlet>
+<servlet>
+ 	<servlet-name>contactar</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.EnviarCorreoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>contactar</servlet-name>
+ 	<url-pattern>/contactar</url-pattern>
+ </servlet-mapping>
+
+ <servlet>
  	<servlet-name>registrar</servlet-name>
     <servlet-class>es.unizar.sisinf.controller.Registrar</servlet-class>
  </servlet>
@@ -24,7 +33,8 @@
  	<url-pattern>/registrar</url-pattern>
  </servlet-mapping>
 
-  <servlet>
+
+ <servlet>
  	<servlet-name>inises</servlet-name>
     <servlet-class>es.unizar.sisinf.controller.IniSes</servlet-class>
  </servlet>
@@ -32,8 +42,9 @@
  	<servlet-name>inises</servlet-name>
  	<url-pattern>/inises</url-pattern>
 </servlet-mapping>
+ 
  	
-  <servlet>
+ <servlet>
  	<servlet-name>ponerPost</servlet-name>
     <servlet-class>es.unizar.sisinf.controller.PonerPost</servlet-class>
  </servlet>

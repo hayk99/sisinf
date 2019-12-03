@@ -53,7 +53,7 @@
                                 <!-- <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
                                     <ul class="dropdown-menu"> -->
-                                <li class="nav-item"><a class="nav-link" href="projects.html">Foro</a></li>
+                                <li class="nav-item"><a class="nav-link" href="foro.jsp">Foro</a></li>
                                         <!-- <li class="nav-item"><a class="nav-link" href="project-details.html">Project Details</a></li> -->
                                 <!-- <li class="nav-item submenu dropdown"> -->
                                     <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -110,6 +110,7 @@
                         
         </section> -->
         <div id="mapid"></div>
+        
         <script>
         var mymap = L.map('mapid').setView([41.6483, -0.8775], 13);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2h1c2VqZWEiLCJhIjoiY2szZzQ3dnJ4MGFnODNmb3plZWZ6MXVpMSJ9.EIEXpPq1oUHmdOpesKBeUw', {
@@ -126,7 +127,15 @@
             ],
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.photon(),
-            }).addTo(mymap);
+            })
+            .on('routeselected', function(e) {
+		        var route = e.route;
+		        alert('Showing route between waypoints:\n' + JSON.stringify(route.inputWaypoints, null, 2));
+		        
+		    })
+    		.addTo(mymap);
+            //}).addTo(mymap);
+            
 
             // var circle = L.circle([41.6483, -0.8775], {
             //     color: 'red',
@@ -134,9 +143,10 @@
             //     fillOpacity: 0.5,
             //     radius: 50
             //     }).addTo(mymap);
-            
         </script>
-    
+         
+        <button type="button" onclick="myFunction()">Try it</button>
+   
         <section class ="botones_mapa">
             <div class="titulomapa1"> CALCULAR RUTA </br></div>
             <div class="titulomapa1"> PUNTOS MAS CONTAMINANTES </br></div>
@@ -171,16 +181,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                             </div>
                             <p>No te pierdas las últimas noticias</p>
                             <div id="mc_embed_signup">
-                                <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                               <!--  <form action="contactar" method="post" class="subscribe_form relative">
                                     <div class="input-group d-flex flex-row">
-                                        <input name="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                        <button class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>      
+                                        <input id="EMAIL" name="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                        <input type="submit" class="btn sub-btn" value="DALE CARLAS">      
                                     </div>              
                                     <div class="mt-10 info"></div>
-                                </form>
+                                </form>-->
+                                
                             </div>
                         </aside>
                     </div>
+                    <form action="contactar" method="post">
+                                	<input id="EMAIL" name="EMAIL" type="email">
+                                	<input style="text-align: center" type="submit" name="daleCarla" id="login-submit" tabindex="4" class="form-control btn btn-login" value="SOLO UN PEZON">
+                                
+                                </form>
                     <div class="col-lg-2">
                         <aside class="f_widget social_widget">
                             <div class="f_title">

@@ -27,6 +27,7 @@ public class PonerPost extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
 		try {	
+			System.out.println("Dale dale");
 			boolean correcto;
 			HttpSession session = request.getSession();
 			String tit = request.getParameter("title");

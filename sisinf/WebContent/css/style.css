@@ -129,9 +129,6 @@ button:focus {
 ============================================================================================ */
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
-.cositas {
-	margin-left: 100px;
-}
 
 .header_area {
   position: absolute;
@@ -2534,11 +2531,11 @@ h6 {
       padding: 30px 30px;
       border-radius: 10px; }
       .h_blog_item .h_blog_text .h_blog_text_inner.left {
-        margin-left: -380px;
+        margin-left: -250px;
         position: relative;
         z-index: 2; }
       .h_blog_item .h_blog_text .h_blog_text_inner.right {
-        margin-right: -67px;
+        margin-right: -250px;
         position: relative;
         z-index: 2; }
       .h_blog_item .h_blog_text .h_blog_text_inner h4 {

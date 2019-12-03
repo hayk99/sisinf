@@ -1,0 +1,49 @@
+!SESSION 2019-12-03 00:42:40.720 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=11.0.4
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.tips.core 4 0 2019-12-03 00:43:42.312
+!MESSAGE 
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.tips.ide.internal.IDETipManager.getEvaluationContext(IDETipManager.java:280)
+	at org.eclipse.tips.ide.internal.IDETipManager.doGetPriority(IDETipManager.java:262)
+	at org.eclipse.tips.ide.internal.IDETipManager.getPriority(IDETipManager.java:246)
+	at org.eclipse.tips.core.internal.TipManager.register(TipManager.java:98)
+	at org.eclipse.tips.ide.internal.IDETipManager.register(IDETipManager.java:81)
+	at org.eclipse.tips.ide.internal.Startup.loadProviders(Startup.java:88)
+	at org.eclipse.tips.ide.internal.Startup.start(Startup.java:72)
+	at org.eclipse.tips.ide.internal.Startup$1.run(Startup.java:56)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.ui 4 4 2019-12-03 00:43:42.439
+!MESSAGE An internal error has occurred.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.tips.ide.internal.IDETipManager.open(IDETipManager.java:106)
+	at org.eclipse.tips.ide.internal.Startup$3.runInUIThread(Startup.java:197)
+	at org.eclipse.ui.progress.UIJob.lambda$0(UIJob.java:95)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4857)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4409)
+	at org.eclipse.swt.widgets.Display.release(Display.java:4461)
+	at org.eclipse.swt.graphics.Device.dispose(Device.java:236)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:166)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:660)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1468)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1441)
