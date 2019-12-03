@@ -1,0 +1,52 @@
+<!-- leaflet css -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+crossorigin=""></script>
+<!-- leaflet route css -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />  
+<script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
+
+
+<div id="mapid" style="width: 600px; height: 400px; position: relative; outline: currentcolor none medium;"></div>
+<script>
+    var mymap = L.map('mapid', {
+        center: [41.6483, -0.8775],
+        zoom: 13
+    }); 
+    var transport = L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=6102764b985c4e99b0441eeddc2fdd5e');
+    var rutasbici = L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=6102764b985c4e99b0441eeddc2fdd5e');
+    var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2h1c2VqZWEiLCJhIjoiY2szZzQ3dnJ4MGFnODNmb3plZWZ6MXVpMSJ9.EIEXpPq1oUHmdOpesKBeUw', {
+        maxZoom: 18,
+        id: 'mapbox.streets',
+    });
+    mymap.addLayer(transport);
+    mymap.addLayer(rutasbici);
+    mymap.addLayer(streets);
+    L.Routing.control({
+            language: 'es',
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.photon(),
+    }).addTo(mymap);
+
+    function addTransporte(){
+        transport.bringToFront();
+    }
+    function addBicis(){
+        rutasbici.bringToFront();
+    }
+    function addCalles(){
+        streets.bringToFront();
+    }
+</script>
+<button type="button" onclick="addTransporte()">Rutas transporte</button>
+<button type="button" onclick="addBicis()">Rutas bicicletas</button>
+<button type="button" onclick="addCalles()">Streets</button>
