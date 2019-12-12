@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException; 
 
 import es.unizar.sisinf.data.db.ConnectionManager.*;
+import es.unizar.sisinf.data.vo.PublicacionVO;
 import es.unizar.sisinf.data.vo.UsuarioVO;
 
 /**
@@ -26,9 +27,30 @@ public class UsuarioDAO {
 	private static String existeCorreo = "SELECT count(*) as cantidad FROM Usuario WHERE correo= ?";
 	private static String checkPass = "SELECT count(*) as cantidad FROM Usuario WHERE correo=? AND contrasena=md5(?)";
 	private static String insertPost = "INSERT INTO Publicacion (idPublicacion, titulo, contenido, correousuario) VALUES (?,?,?,?)";
+	private static String findNews = "SELECT * FROM Publicacion";
 	
 	private static int contador = 0;
 	
+	public List<PublicacionVO> getAllNews() {
+		List<PublicacionVO> result = new ArrayList<PublicacionVO>();
+		try {// Abrimoslaconexión e inicializamoslosparámetros 
+			System.out.println("llego aqui");
+			Connection conn = ConnectionManager.getConnection(); 
+			PreparedStatement ps = conn.prepareStatement(findNews);
+			// Ejecutamos la consulta 
+			ResultSet rs = ps.executeQuery();
+			// Leemos resultados 
+			while(rs.next()) {
+				PublicacionVO tmp = new PublicacionVO(rs.getInt("idPublicacion"), rs.getString("titulo"), rs.getString("contenido"), rs.getString("correousuario"));
+				result.add(tmp); 
+			}  
+		} catch(SQLException se) {
+			se.printStackTrace();  
+		} catch(Exception e) {
+			e.printStackTrace(System.err); 
+		}
+		return result;
+	}
 	public boolean insertPost (String titulo, String body, String mail) {
 		boolean exito = false;
 		try {
@@ -43,6 +65,7 @@ public class UsuarioDAO {
 				System.out.println("METIDO POST CORRECTAMENTE");
 				exito = true;
 			}
+			ConnectionManager.releaseConnection(conn);
 			
 		}catch (SQLException se) {
 			se.printStackTrace();

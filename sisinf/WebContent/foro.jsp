@@ -45,7 +45,7 @@
 										<!-- <li class="nav-item submenu dropdown">
 											<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
 											<ul class="dropdown-menu"> -->
-										<li class="nav-item"><a class="nav-link" href="projects.html">Foro</a></li>
+										<li class="nav-item"><a class="nav-link" href="foro.jsp">Foro</a></li>
 												<!-- <li class="nav-item"><a class="nav-link" href="project-details.html">Project Details</a></li> -->
 										<!-- <li class="nav-item submenu dropdown"> -->
 											<!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -87,7 +87,7 @@
 							<h2>Foro</h2>
 							<div class="page_link">
 								<a href="index.html">Home</a>
-								<a href="projects.html">Foro</a>
+								<a href="foro.jsp">Foro</a>
 							</div>
 						</div>
 					</div>
@@ -102,8 +102,8 @@
 					 	<%@ page import="java.sql.*" %>
 				        <%@ page import="es.unizar.sisinf.*" %>
 				        <%@ page import="es.unizar.sisinf.data.db.ConnectionManager.*" %>
-				        <%
-					        String findNews = "SELECT * FROM Publicacion";
+				      	<%
+				      	  String findNews = "SELECT * FROM Publicacion";
 					        	try {
 								Connection conn = ConnectionManager.getConnection();
 								PreparedStatement ps = conn.prepareStatement(findNews);
@@ -150,8 +150,45 @@
 				        
 		    							out.println("</div>");
        								out.println("</div>");
-								out.println("</section>");
-						%>       
+								out.println("</section>"); 
+						%>   
+						<!--
+						<section class="home_blog_area p_120">
+							<div class="container">
+								<div class="home_blog_inner">
+									<div class="col-lg-6">
+										<div class="h_blog_text">
+											<div class="h_blog_text_inner left">
+													<h2 id="ultimas">ÚLTIMAS &nbspPUBLICACIONES</br></h2>
+											</div>
+										</div>
+									</div>
+								<c:forEach var="demo" items="${listaDemo}">
+							-->
+									<!-- String tit = rs.getString("titulo");
+									String body = rs.getString("contenido");
+									String user = rs.getString("correousuario");-->
+							<!--		<div class="row h_blog_item">
+										<div class="col-lg-6">
+											<div class="h_blog_img">
+												<img class="img-fluid" src="img/home-blog/h-blog-3.jpg" alt="">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="h_blog_text">
+												<div class="h_blog_text_inner left">
+													<h4>"TOPIC: ${demo.title}"</h4>
+													<p>${demo.author} "ha publicado:"</p>
+													<p>${demo.content}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+								</div>
+							</div>"
+						</section>"-->
+						
         <!--================ECRIBIR PUBLICACION AREA =================-->
         <section class="home_blog_area p_120">
         	<div class="container">
@@ -192,25 +229,6 @@
 			
 		
 </section>
-        <!--================End Home Blog Area =================-->
-        
-        <!--================Instagram Area =================-->
-        <!-- <section class="instagram_area">
-        	<div class="container box_1620">
-        		<div class="insta_btn">
-        			<a class="btn theme_btn" href="#">Follow us on instagram</a>
-        		</div>
-        		<div class="instagram_image row m0">
-        			<a href="#"><img src="img/instagram/ins-1.jpg" alt=""></a>
-        			<a href="#"><img src="img/instagram/ins-2.jpg" alt=""></a>
-        			<a href="#"><img src="img/instagram/ins-3.jpg" alt=""></a>
-        			<a href="#"><img src="img/instagram/ins-4.jpg" alt=""></a>
-        			<a href="#"><img src="img/instagram/ins-5.jpg" alt=""></a>
-        			<a href="#"><img src="img/instagram/ins-6.jpg" alt=""></a>
-        		</div>
-        	</div>
-        </section> -->
-        <!--================End Instagram Area =================-->
         
          <!--================Footer Area =================-->
 		 <footer class="footer_area">
@@ -229,23 +247,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </p>
 						</aside>
 					</div>
-					<div class="col-lg-5 col-sm-6">
-						<aside class="f_widget news_widget">
-							<div class="f_title">
-								<h3>¡Subscríbete!</h3>
-							</div>
-							<p>No te pierdas las últimas noticias</p>
-							<div id="mc_embed_signup">
-								<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
-									<div class="input-group d-flex flex-row">
-										<input name="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-										<button class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>		
-									</div>				
-									<div class="mt-10 info"></div>
-								</form>
-							</div>
-						</aside>
-					</div>
+                    <div class="col-lg-5 col-sm-6">
+                     <aside class="f_widget ab_widget">
+                            <div class="f_title">
+                                <h3>¡Subscríbete!</h3>
+                            </div>
+                            <p>No te pierdas las últimas noticias</p>
+                                <form method="post" action="contactar" class="subscribe_form relative">
+                                    <div class="input-group d-flex flex-row">
+                                        <input name="EMAIL" id="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" type="email">
+                                        
+                                            <!-- <input style="text-align: center" type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Enviar">             -->
+                                            <button type= "submit" class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>
+                                        </div>
+                                </form>
+                                </aside>
+                        <div class="col-lg-2">
+                            <aside class="f_widget social_widget">
+                                <div class="f_title">
+                                    <h3>¡Síguenos!</h3>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
 					<div class="col-lg-2">
 						<aside class="f_widget social_widget">
 							<div class="f_title">

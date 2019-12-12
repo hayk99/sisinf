@@ -40,12 +40,12 @@ public class PonerPost extends HttpServlet {
 						
 			if (correcto) {
 				System.out.println("Correcta la publicacion");
-				request.setAttribute("msg", "correcta la publicacion");
+				request.setAttribute("msg", "Se ha publicado correctamente el post");
 				request.getRequestDispatcher("jsp/publicado.jsp").forward(request, response);
 			}
 			else {
 				System.out.println("Mal la publicacion");
-				request.setAttribute("error", "mal publicado");
+				request.setAttribute("error", "Debe iniciar sesión para publicar un post");
 				request.getRequestDispatcher("jsp/publicadoMal.jsp").forward(request, response);
 			}
 		}catch(Throwable theException) {

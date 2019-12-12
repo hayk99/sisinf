@@ -92,7 +92,7 @@
                     <div class="container">
                         <div class="banner_content text-center">
                             <h3>ECOZITY</h3>
-                            <h5>"Todo lo que le ocurra a la tierra, le ocurrirá a los hijos de la tierra""</h5>
+                            <h5>"Todo lo que le ocurra a la tierra, le ocurrirá a los hijos de la tierra"</h5>
                             <!-- <a class="main_btn" href="#">Explore Gallery</a> -->
                         </div>
                     </div>
@@ -109,51 +109,58 @@
                         </div>
                         
         </section> -->
-        <div id="mapid"></div>
-        
-        <script>
-        var mymap = L.map('mapid').setView([41.6483, -0.8775], 13);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2h1c2VqZWEiLCJhIjoiY2szZzQ3dnJ4MGFnODNmb3plZWZ6MXVpMSJ9.EIEXpPq1oUHmdOpesKBeUw', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            }).addTo(mymap);
+<!-- leaflet css -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+            <!-- leaflet route css -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+            <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+            <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+            <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+            <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+            <link  rel="stylesheet"  href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />  
+            <script  src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>  
 
-            L.Routing.control({
-            language: 'es',
-            waypoints: [
-                //L.latLng(41.6483, -0.8775),
-               // L.latLng(41.6483, -0.8775)
-            ],
-            routeWhileDragging: true,
-            geocoder: L.Control.Geocoder.photon(),
-            })
-            .on('routeselected', function(e) {
-		        var route = e.route;
-		        alert('Showing route between waypoints:\n' + JSON.stringify(route.inputWaypoints, null, 2));
-		        
-		    })
-    		.addTo(mymap);
-            //}).addTo(mymap);
-            
 
-            // var circle = L.circle([41.6483, -0.8775], {
-            //     color: 'red',
-            //     fillColor: '#f03',
-            //     fillOpacity: 0.5,
-            //     radius: 50
-            //     }).addTo(mymap);
-        </script>
-         
-        <button type="button" onclick="myFunction()">Try it</button>
-   
-        <section class ="botones_mapa">
-            <div class="titulomapa1"> CALCULAR RUTA </br></div>
-            <div class="titulomapa1"> PUNTOS MAS CONTAMINANTES </br></div>
-            <div class="titulomapa1"> TRAFICO </br></div>
-            <div class="titulomapa1"> PARQUES Y ZONAS LIMPIAS </br></div>
-            <div class="titulomapa1"> FILTRAR </br></div>
-        </section>
+            <div id="mapid" style="width: 600px; height: 400px; position: relative; outline: currentcolor none medium;"></div>
+            <script>
+                var mymap = L.map('mapid', {
+                    center: [41.6483, -0.8775],
+                    zoom: 13
+                }); 
+                var transport = L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=6102764b985c4e99b0441eeddc2fdd5e');
+                var rutasbici = L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=6102764b985c4e99b0441eeddc2fdd5e');
+                var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2h1c2VqZWEiLCJhIjoiY2szZzQ3dnJ4MGFnODNmb3plZWZ6MXVpMSJ9.EIEXpPq1oUHmdOpesKBeUw', {
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                });
+                mymap.addLayer(transport);
+                mymap.addLayer(rutasbici);
+                mymap.addLayer(streets);
+                L.Routing.control({
+                        language: 'es',
+                        routeWhileDragging: true,
+                        geocoder: L.Control.Geocoder.photon(),
+                }).addTo(mymap);
+
+                function addTransporte(){
+                    transport.bringToFront();
+                }
+                function addBicis(){
+                    rutasbici.bringToFront();
+                }
+                function addCalles(){
+                    streets.bringToFront();
+                }
+            </script>
+            <button type="button" onclick="addTransporte()">Rutas transporte</button>
+            <button type="button" onclick="addBicis()">Rutas bicicletas</button>
+            <button type="button" onclick="addCalles()">Streets</button>
         <!--================End Home Blog Area =================-->
         
     
@@ -175,28 +182,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         </aside>
                     </div>
                     <div class="col-lg-5 col-sm-6">
-                        <aside class="f_widget news_widget">
+                     <aside class="f_widget ab_widget">
                             <div class="f_title">
                                 <h3>¡Subscríbete!</h3>
                             </div>
                             <p>No te pierdas las últimas noticias</p>
-                            <div id="mc_embed_signup">
-                               <!--  <form action="contactar" method="post" class="subscribe_form relative">
+                                <form method="post" action="contactar" class="subscribe_form relative">
                                     <div class="input-group d-flex flex-row">
-                                        <input id="EMAIL" name="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                        <input type="submit" class="btn sub-btn" value="DALE CARLAS">      
-                                    </div>              
-                                    <div class="mt-10 info"></div>
-                                </form>-->
-                                
-                            </div>
-                        </aside>
-                    </div>
-                    <form action="contactar" method="post">
-                                	<input id="EMAIL" name="EMAIL" type="email">
-                                	<input style="text-align: center" type="submit" name="daleCarla" id="login-submit" tabindex="4" class="form-control btn btn-login" value="SOLO UN PEZON">
-                                
+                                        <input name="EMAIL" id="EMAIL" placeholder="Introduce tu correo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" type="email">
+                                        
+                                            <!-- <input style="text-align: center" type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Enviar">             -->
+                                            <button type= "submit" class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>
+                                        </div>
                                 </form>
+                                </aside>
+                        <div class="col-lg-2">
+                            <aside class="f_widget social_widget">
+                                <div class="f_title">
+                                    <h3>¡Síguenos!</h3>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
                     <div class="col-lg-2">
                         <aside class="f_widget social_widget">
                             <div class="f_title">

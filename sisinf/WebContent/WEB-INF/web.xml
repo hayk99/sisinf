@@ -15,13 +15,14 @@
  	<url-pattern>/loginServ</url-pattern>
  </servlet-mapping>
 
+
 <servlet>
- 	<servlet-name>contactar</servlet-name>
-    <servlet-class>es.unizar.sisinf.controller.EnviarCorreoServlet</servlet-class>
+ 	<servlet-name>news</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.GetNews</servlet-class>
  </servlet>
  <servlet-mapping>
- 	<servlet-name>contactar</servlet-name>
- 	<url-pattern>/contactar</url-pattern>
+ 	<servlet-name>news</servlet-name>
+ 	<url-pattern>/news</url-pattern>
  </servlet-mapping>
 
  <servlet>
@@ -51,6 +52,24 @@
  <servlet-mapping>
  	<servlet-name>ponerPost</servlet-name>
  	<url-pattern>/ponerPost</url-pattern>
+ </servlet-mapping>
+
+ <servlet>
+ 	<servlet-name>contactar</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.EnviarCorreoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>contactar</servlet-name>
+ 	<url-pattern>/contactar</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ 	<servlet-name>contacto</servlet-name>
+    <servlet-class>es.unizar.sisinf.controller.EnviarContactoServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ 	<servlet-name>contacto</servlet-name>
+ 	<url-pattern>/contacto</url-pattern>
  </servlet-mapping>
 
 

@@ -12,6 +12,6 @@
 	<% String msg = (String)request.getAttribute("error"); %>
 	<script>
 		window.alert("<%=msg%>");
-		window.location.href ="/sisinf/projects.html";
+		window.location.href ="/sisinf/foro.jsp";
 		</script>
 </html>
